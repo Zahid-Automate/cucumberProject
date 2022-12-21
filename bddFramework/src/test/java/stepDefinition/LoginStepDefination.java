@@ -1,43 +1,41 @@
 package stepDefinition;
 
-import cucumber.api.java.en.Given;
-import cucumber.api.java.en.Then;
-import cucumber.api.java.en.When;
-import pageRepositories.SinceraPageRepository_homePage;
+
+import io.cucumber.java.en.And;
+import io.cucumber.java.en.Given;
+import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
+import pageRepositories.PageRepository;
 import rootClass.Rootclass;
 import utility.ActionsClass;
 import utility.Utility;
 
-public class SinceraStepDefinition extends Rootclass {
+public class LoginStepDefination extends Rootclass {
 
-	SinceraPageRepository_homePage homePage = new SinceraPageRepository_homePage();
+	PageRepository homePage = new PageRepository();
 	ActionsClass act = new ActionsClass();
 	Utility ut=new Utility();
 	
-
-
 	@Given("^I launch the URL$")
 	public void i_launch_the_URL() throws Throwable {
-	  act.launchUrl();
-	 
+	  act.launchUrl(); 
 	}
 
-	@When("^I enter existing mail \"([^\"]*)\"$")
-	public void i_enter_existing_mail(String email) throws Throwable {
-		homePage.enterCreateEmail(email);
+	@When("^I enter existing username \"([^\"]*)\" and existing Email \"([^\"]*)\"$")
+	public void i_enter_existing_username_and_existing_email(String validUname, String existingEmail) {
+	    // Write code here that turns the phrase above into concrete actions
+		homePage.enterCreateEmail(validUname, existingEmail);
 	}
 
+	
 	@Then("^I verify the error message$")
 	public void i_verify_the_error_message() throws Throwable {
 	    homePage.validateErrorMsg(ut.readProperty("errorMsg", "config"));
 	}
 
-	@Then("^I login with valid credintials \"([^\"]*)\" and \"([^\"]*)\"$")
-	public void i_login_with_valid_credintials_and(String uname, String pwd) throws Throwable {
-		homePage.login(uname, pwd);
+	@And("^I login with valid credentials \"([^\"]*)\" and \"([^\"]*)\"$")
+	public void i_login_with_valid_credentials_and(String existingEmail, String validPwd) throws Throwable {
+		homePage.login(existingEmail, validPwd);
 	}
-
-	
-	
 
 }

@@ -1,19 +1,15 @@
 package baseClass;
 
-import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 
-import com.aventstack.extentreports.ExtentReports;
-import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
-
-import cucumber.api.Scenario;
-import cucumber.api.java.After;
-import cucumber.api.java.Before;
+import io.cucumber.java.After;
+import io.cucumber.java.Before;
 import rootClass.Rootclass;
 import utility.Utility;
+import io.github.bonigarcia.wdm.WebDriverManager;
 
 public class BaseClass extends Rootclass {
 
@@ -31,9 +27,6 @@ public class BaseClass extends Rootclass {
 	* @return void
 	*/
 	public void initialSetup() {
-		htmlReporter = new ExtentHtmlReporter(System.getProperty("user.dir") + "/test-output/MyOwnReport.html");
-		extent = new ExtentReports();
-		extent.attachReporter(htmlReporter);
 		
 		System.out.println("initialSetup() is getting executed");
 		String browserIE = ut.readProperty("ie", "config");
@@ -41,29 +34,21 @@ public class BaseClass extends Rootclass {
 		String browserFirefox = ut.readProperty("firefox", "config");
 
 		if (browserIE.equalsIgnoreCase("Yes")) {
-
-			System.setProperty("webdriver.ie.driver", "src//test//resources//Drivers//IEDriverServer.exe");
-
+	        WebDriverManager.chromedriver().setup();
 			// Initialize browser
 			driver = new InternetExplorerDriver();
 			driver.manage().window().maximize();
-
 		} else if (browserChrome.equalsIgnoreCase("Yes")) {
-			System.setProperty("webdriver.chrome.driver", "src//test//resources//Drivers//chromedriver.exe");
-
+	        WebDriverManager.chromedriver().setup();
 			// Initialize browser
 			driver = new ChromeDriver();
 			driver.manage().window().maximize();
-			driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-
+			driver.manage().timeouts().getImplicitWaitTimeout();
 		} else if (browserFirefox.equalsIgnoreCase("Yes")) {
-
-			System.setProperty("webdriver.firefox.marionette", "src//test//resources//Drivers//geckodriver.exe");
-
+			WebDriverManager.firefoxdriver().setup();
 			// Initialize browser
 			driver = new FirefoxDriver();
 			driver.manage().window().maximize();
-
 		}
 	}
 
@@ -74,7 +59,7 @@ public class BaseClass extends Rootclass {
 	 */
 	@After
 	public void closeBrowser() {
-		driver.close();
+		driver.quit();
 	}
 
 }

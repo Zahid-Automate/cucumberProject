@@ -1,12 +1,12 @@
-Feature: Sincera Mini project
+Feature: Validation of Login
 
   @Login
   Scenario Outline: Validating login functionality
     Given I launch the URL
-    When I enter existing mail "<existingEmail>"
+    When I enter existing username "<validUname>" and existing Email "<existingEmail>"
     Then I verify the error message
-    And I login with valid credintials "<validUname>" and "<validPwd>"
+    And I login with valid credentials "<validUname>" and "<validPwd>"
 
     Examples: 
       | validUname                | validPwd | existingEmail             |
-      | smitachauhan191@gmail.com | changeme | smitachauhan191@gmail.com |
+      | Smitha Chauhan            | changeme | smitachauhan191@gmail.com |

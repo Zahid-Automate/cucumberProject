@@ -14,7 +14,7 @@ public class Utility extends Rootclass{
 	 
 	/**
 	 * This method is responsible to read the data from properties file
-	 * @author Ashwin
+	 * @author Zahid
 	 * @throws IOException 
 	 * @key: unique key of the properties file
 	 * @propertiesFileName: file name 
