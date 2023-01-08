@@ -61,5 +61,5 @@ public class BaseClass extends Rootclass {
 	public void closeBrowser() {
 		driver.quit();
 	}
-
+	//Merge conflict
 }
