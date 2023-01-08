@@ -142,12 +142,15 @@ public class PageRepository extends Rootclass {
 		switch (howTo) {
 		case "index":
 		      dropDownElement.deselectByIndex(Integer.parseInt(value));
+		      Log.info("DropDown value choosen is "+value);
 		      break;
 		case "value":
 			  dropDownElement.selectByVisibleText(value);
+			  Log.info("DropDown value choosen is "+value);
 			  break;
 		case "text":
 			  dropDownElement.selectByValue(value);
+			  Log.info("DropDown value choosen is "+value);
 			  break;
 		default : 
 			Log.info("Please provide a valid value from the feature file, valid values are index , value , text");
